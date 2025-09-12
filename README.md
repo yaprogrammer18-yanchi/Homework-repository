@@ -2,6 +2,8 @@
 
 Этот репозиторий создан, чтобы делать в нем домашню работу
 
-Почта: yaprogrammer18@gmail.com  
+Почта: yaprogrammer18@gmail.com 
+
 Тг: @Yanoo4kka
+
 Имя: Яна
