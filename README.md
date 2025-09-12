@@ -2,7 +2,7 @@
 
 Этот репозиторий создан, чтобы делать в нем домашню работу
 
-Почта: yaprogrammer18@gmail.com 
+Почта: yaprogrammer18@gmail.com или st141282@student.spbu.ru
 
 Тг: @Yanoo4kka
 
