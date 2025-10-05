@@ -20,7 +20,7 @@ def queen(n):
     count_of_combinations = 0
     for board in permutations(
         all_possib_posit
-    ):  # будем рассматривать свсевозможные расположения ферзей
+    ):  # будем рассматривать всевозможные расположения ферзей
         # board - это уже полноценная шахматная доска с расставленными ферзями
         list_of_unsafe_places = []
 
