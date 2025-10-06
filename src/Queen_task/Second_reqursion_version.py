@@ -52,6 +52,3 @@ def main(n):
     # сравним с некой глобальной переменной
     finding_combinations(board, 0, n, count_of_combinations)
     return len(count_of_combinations)
-
-
-print(main(4))

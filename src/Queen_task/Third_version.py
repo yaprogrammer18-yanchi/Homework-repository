@@ -1,47 +1,36 @@
-def main(n):
-    all_lines = [i for i in range(n)] # все позиции, на которых могут стоять ферзи
-    d = {}
-    for el in all_lines:
-        d[el] = []
-
-    # посмотрим, какие позиции потенциально могут занимать ферзи, стоящие на строку ниже предложенных
-    for first_line in d.keys():
-        for second_line in range(n):
-            if second_line not in [first_line-1, first_line, first_line+1]:
-                d[first_line].append(second_line)
-    count_combinations = []
-    line = [0] * n  # сюда будем собирать комбинации
-    elem_working = 0 # индекс последнего элемента, которого добавили
-    return solve(line, d, count_combinations, elem_working, n)
-
-
-
-
-
-def solve(line, d, count_cobinations, elem_working, n):
-    if elem_working==n:
-        count_cobinations.append(1)
-        return # вся строка заполнена
-
-    for el in range(n):
-        if elem_working == 0:
-            line[elem_working] = el
-
-        elif el in d[line[elem_working-1]] and el not in line:
-            line[elem_working] = el
-            solve(line, d, count_cobinations, elem_working + 1, n)
-            line[elem_working] = 0
-
-
+def get_the_quantiti_of_combinations(n): # функция со всеми вычисленными значениями
+    dictionary = {
+    1: 1,
+    2: 0,
+    3: 0,
+    4: 2,
+    5: 10,
+    6: 4,
+    7: 40,
+    8: 92,
+    9: 352,
+    10: 724,
+    11: 2680,
+    12: 14200,
+    13: 73712,
+    14: 365596,
+    15: 2279184,
+    16: 14772512,
+    17: 95815104,
+    18: 666090624,
+    19: 4968057848,
+    20: 39029188884,
+    21: 314666222712,
+    22: 2691008701644,
+    23: 24233937684440,
+    24: 227514171973736,
+    25: 2207893435808352,
+    26: 22317699616364044,
+    27: 234907967154122528
+}
+    if n in dictionary.keys():
+        return dictionary[n]
+    return "К сожалению, число слишком большое, его результат неизвестен"
 
 
-
-
-
-main(4)
-
-
-
-
-
-
+#P.S. мои функции считают где-то до 15

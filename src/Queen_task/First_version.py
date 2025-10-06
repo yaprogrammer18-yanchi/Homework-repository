@@ -15,7 +15,7 @@ def all_possible_positions(n):  # возвращает все позиции ф�
     return all_possible_positions
 
 
-def queen(n):
+def find_al_the_combinations(n):
     all_possib_posit = all_possible_positions(n)
     count_of_combinations = 0
     for board in permutations(
