@@ -60,7 +60,7 @@ def test_any_array_whether_it_is_sorted(arr):
 
 @given(hypothesis.strategies.lists(hypothesis.strategies.integers()))
 def test_if_all_elements_are_there(arr):
-    assert all(i in arr for i in heap_sort(arr)) == True
+    assert all(i in arr for i in heap_sort(arr))
 
 
 @given(hypothesis.strategies.lists(hypothesis.strategies.integers()))
