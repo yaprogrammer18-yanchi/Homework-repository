@@ -20,4 +20,4 @@ jobs:
           pip install hypothesis
 
       - name: Run tests
-        run: pytest -v
+        run: PYTHONPATH=.:$PYTHONPATH pytest -v
