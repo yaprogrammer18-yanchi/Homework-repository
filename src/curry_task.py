@@ -21,6 +21,7 @@ def curry(func, arity):
             lst = []
             return tmp
         return inner
+
     return inner
 
 
