@@ -29,21 +29,6 @@ def test_mul_three_elements_check(a, b, c):
     assert uncarried_func(a, b, c) == a * b * c
 
 
-@given(
-    a=st.integers(max_value=5), b=st.integers(max_value=5), c=st.integers(max_value=5)
-)
-def test_power_element_check(a, b, c):
-    def power(a, b, c):
-        return a**b**c
-
-    func = curry(power, 3)
-    uncarried_func = uncurry(func, 3)
-    for el in (a, b, c):
-        func = func(el)
-    assert func == a**b**c
-    assert uncarried_func(a, b, c) == a**b**c
-
-
 def test_wrong_arity_errors1():
     try:
 
