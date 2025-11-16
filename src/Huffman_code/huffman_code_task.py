@@ -72,8 +72,23 @@ def encode(msg: str) -> tuple[str, dict[str, str]]:
 
 
 def decode(encoded: str, table: dict[str, str]) -> str:
-    # Возвращает раскодированную строку
-    pass
+    decoding_table = {code: char for char, code in table.items()}
+    lst_of_decoded_chars = []
+    tmp = ''
+    r = 0
+    l = 1
+    while r != len(encoded):
+        tmp = encoded[r:l]
+
+        if tmp not in lst_of_decoded_chars and tmp in decoding_table:
+            lst_of_decoded_chars.append(decoding_table[tmp])
+            r = l
+        l+=1
+
+    return ''.join(lst_of_decoded_chars)
+
+
+
 
 def encode_file(input_path: str, output_path: str):
     # Читает текстовый файл, кодирует и записывает в бинарный файл
