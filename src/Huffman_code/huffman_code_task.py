@@ -48,6 +48,9 @@ def encode(msg: str) -> tuple[str, dict[str, str]]:
                 code_and_collect_every_path(node.right, prefix + "1")
     if lst_of_nodes:
         code_and_collect_every_path(lst_of_nodes[0], '')
+    if len(table) == 1:
+        char = list(table.keys())[0]
+        table[char] = '0'  # или '1' - любой непустой код
     encoded_msg = ''
     for el in msg:
         encoded_msg += table[el]
