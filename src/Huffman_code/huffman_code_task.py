@@ -95,10 +95,6 @@ def decode_file(input_path, output_path):
 
     with open(output_path, "w", encoding="utf-8") as output_file:
         table_json = table_bytes.decode("utf-8")
-
         output_file.write(table_json)
         output_file.write('\n')
         output_file.write(msg.decode("utf-8"))
-
-
-# + сделать тестов для всего этого
