@@ -1,3 +1,7 @@
+import json
+from os import write
+
+
 class Node:
     def __init__(self, symbol=None, freq=0):
         self.symbol = symbol
@@ -42,33 +46,12 @@ def encode(msg: str) -> tuple[str, dict[str, str]]:
                 code_and_collect_every_path(node.left, prefix + "0")
             if node.right:
                 code_and_collect_every_path(node.right, prefix + "1")
-
-
-
     if lst_of_nodes:
         code_and_collect_every_path(lst_of_nodes[0], '')
-
     encoded_msg = ''
     for el in msg:
         encoded_msg += table[el]
-
     return (encoded_msg, table)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def decode(encoded: str, table: dict[str, str]) -> str:
@@ -79,23 +62,43 @@ def decode(encoded: str, table: dict[str, str]) -> str:
     l = 1
     while r != len(encoded):
         tmp = encoded[r:l]
-
         if tmp not in lst_of_decoded_chars and tmp in decoding_table:
             lst_of_decoded_chars.append(decoding_table[tmp])
             r = l
         l+=1
-
     return ''.join(lst_of_decoded_chars)
 
 
+def encode_file(input_path, output_path):
+    with open(input_path, 'r', encoding="utf-8") as input_file:
+        msg = input_file.read()
+        encoded_msg, table = encode(msg)
+
+    table = json.dumps(table, ensure_ascii=False)
+    table_bytes = table.encode("utf-8")
+    encoded_bytes = encoded_msg.encode("utf-8")
+
+    with open(output_path, 'wb') as output_file:
+        # записали в 4 байта размер таблицы
+        table_size_in_bytes = len(table_bytes).to_bytes(4, 'big')
+        output_file.write(table_size_in_bytes)
+        output_file.write(table_bytes)
+        output_file.write(encoded_bytes)
 
 
-def encode_file(input_path: str, output_path: str):
-    # Читает текстовый файл, кодирует и записывает в бинарный файл
-    pass
+def decode_file(input_path, output_path):
+    with open(input_path, 'rb') as input_file:
+        quantity_of_bytes = input_file.read(4)
+        table_size = int.from_bytes(quantity_of_bytes, 'big')
+        table_bytes = input_file.read(table_size)
+        msg = input_file.read()
 
-def decode_file(input_path: str, output_path: str):
-    # Читает бинарный файл, декодирует и записывает текстовый файл
-    pass
+    with open(output_path, "w", encoding="utf-8") as output_file:
+        table_json = table_bytes.decode("utf-8")
+
+        output_file.write(table_json)
+        output_file.write('\n')
+        output_file.write(msg.decode("utf-8"))
+
 
 # + сделать тестов для всего этого
