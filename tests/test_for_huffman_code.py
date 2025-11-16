@@ -12,7 +12,7 @@ def test_that_everything_works_with_any_text(text):
 def test_types(text):
     msg, table = encode(text)
     decoded_msg = decode(msg, table)
-    assert type(msg) == str and type(table) == dict and type(decoded_msg) == str
+    assert type(msg) is str and type(table) is dict and type(decoded_msg) is str
 
 @given(st.text())
 def test_table_equality(text):
