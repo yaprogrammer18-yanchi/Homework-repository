@@ -60,7 +60,6 @@ def encode(msg: str) -> tuple[str, dict[str, str]]:
 def decode(encoded: str, table: dict[str, str]) -> str:
     decoding_table = {code: char for char, code in table.items()}
     lst_of_decoded_chars = []
-    tmp = ''
     r = 0
     l = 1
     while r != len(encoded):
