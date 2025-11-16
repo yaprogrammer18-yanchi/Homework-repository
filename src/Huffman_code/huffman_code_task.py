@@ -61,13 +61,13 @@ def decode(encoded: str, table: dict[str, str]) -> str:
     decoding_table = {code: char for char, code in table.items()}
     lst_of_decoded_chars = []
     r = 0
-    l = 1
+    left = 1
     while r != len(encoded):
-        tmp = encoded[r:l]
+        tmp = encoded[r:left]
         if tmp not in lst_of_decoded_chars and tmp in decoding_table:
             lst_of_decoded_chars.append(decoding_table[tmp])
-            r = l
-        l+=1
+            r = left
+        left+=1
     return ''.join(lst_of_decoded_chars)
 
 
