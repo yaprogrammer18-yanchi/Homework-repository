@@ -4,6 +4,7 @@ class Graph:
         self.edges = edges
         self.visited_vertices = list()
         self.index = 0
+        self.dfs_completed = False
 
     def dfs(self) -> list[int]:
         states = {"white": [v for v in self.vertices],
@@ -26,11 +27,13 @@ class Graph:
         for vertex in self.vertices:
             if vertex in states["white"]:
                 dfs_step(vertex)
+        self.dfs_completed = True
         return self.visited_vertices
 
     def __iter__(self):
-        if self.visited_vertices == []:
+        if not self.dfs_completed:
             self.visited_vertices = self.dfs()
+            self.dfs_completed = True
         self.index = 0
         return self
 
