@@ -4,9 +4,9 @@ class Graph:
         self.edges = edges
         self.visited_vertices = list()
         self.index = 0
-        self.dfs_completed = False
 
     def dfs(self) -> list[int]:
+        self.visited_vertices = []
         states = {"white": [v for v in self.vertices],
                   "grey": list(),
                   "black": list()}
@@ -24,22 +24,30 @@ class Graph:
                             dfs_step(edge[0])
                 states["black"].append(vertex)
                 states["grey"].remove(vertex)
+
         for vertex in self.vertices:
             if vertex in states["white"]:
                 dfs_step(vertex)
-        self.dfs_completed = True
         return self.visited_vertices
 
-    def __iter__(self):
-        if not self.dfs_completed:
-            self.visited_vertices = self.dfs()
-            self.dfs_completed = True
-        self.index = 0
-        return self
 
-    def __next__(self):
-        if self.index >= len(self.visited_vertices):
-            raise StopIteration
-        vertex = self.visited_vertices[self.index]
-        self.index += 1
-        return vertex
+    def __iter__(self):
+        class GraphIterator:
+            def __init__(self, visited_vertices):
+                self.visited_vertices = visited_vertices
+                self.index = 0
+
+            def __iter__(self):
+                return self
+
+            def __next__(self):
+                if self.index >= len(self.visited_vertices):
+                    raise StopIteration
+                vertex = self.visited_vertices[self.index]
+                self.index += 1
+                return vertex
+
+            if not self.visited_vertices:
+                self.visited_vertices = self.dfs()
+
+        return GraphIterator(self.visited_vertices)
