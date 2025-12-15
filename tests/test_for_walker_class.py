@@ -15,3 +15,8 @@ def test_error():
 def test_empty_list():
     with pytest.raises(ValueError, match="Переданный список пустой"):
         Walker([])
+
+
+def test_error_sum_under_one():
+    with pytest.raises(ValueError, match="Вероятности в сумме не дают 1!"):
+        Walker([["A", 0.5], ["D", 0.4]])
