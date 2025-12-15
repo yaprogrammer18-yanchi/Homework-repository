@@ -1,9 +1,9 @@
 import random
 import math
 
+
 class Walker:
     def __init__(self, events_and_prob):
-
         if not events_and_prob:
             raise ValueError("Переданный список пустой")
         self.events_and_prob = events_and_prob
@@ -32,7 +32,6 @@ class Walker:
         if i != 1:
             raise ValueError("Вероятности в сумме не дают 1!")
 
-
     def build_table(self):
         i = 0
         while self.donors and self.recipients:
@@ -46,7 +45,6 @@ class Walker:
 
             recipient_current_prob += donor_can_give
 
-
             recipient[2] = recipient_current_prob
             if recipient_needed_prob >= recipient_current_prob:
                 self.recipients.append(recipient)
@@ -59,11 +57,9 @@ class Walker:
             i += 1
         self.table[-1] = [recipient_event, 0, 1]
 
-
     def printall(self):
         for i in range(len(self.table)):
             print(self.table[i])
-
 
     def get_random(self):
         random_number = random.random()
